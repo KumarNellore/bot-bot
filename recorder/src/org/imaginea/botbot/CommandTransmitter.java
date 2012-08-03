@@ -151,7 +151,7 @@ public class CommandTransmitter {
 							.getHeaderFields();
 
 					if (connection.getResponseCode() == 201) {
-						Log.i("bot-bot", respHeaders.get("Location").toString());
+						Log.i("bot-bot", respHeaders.get("location").toString());
 					} else {
 						Log.i("bot-bot", "Invalid Response");
 					}
@@ -190,7 +190,8 @@ public class CommandTransmitter {
 						sb.append(line);
 					}
 					rd.close();
-					String result = sb.toString();
+					//I comment these for a while
+					/*String result = sb.toString();
 					String status = result.substring(
 							result.indexOf("<status>") + 8,
 							result.indexOf("</status>"));
@@ -199,9 +200,9 @@ public class CommandTransmitter {
 						prevRecord=0;
 						CommandTransmitter.sessionID = createNewSession();
 						session = CommandTransmitter.sessionID;
-					} else if (status.contentEquals("started")) {
-						session = CommandTransmitter.sessionID;
-					}
+						} else if (status.contentEquals("started")) {*/
+					session = CommandTransmitter.sessionID;
+						//}
 				} catch (IOException e) {
 					Log.i("bot-bot",
 							"Unable to get status of the record. Application will continue without recording");
@@ -230,7 +231,7 @@ public class CommandTransmitter {
 						.getHeaderFields();
 
 				if (connection.getResponseCode() == 201) {
-					String temp = respHeaders.get("Location").get(0);
+					String temp = respHeaders.get("location").get(0);
 					genSessionId = temp.substring(temp
 							.lastIndexOf("/") + 1);
 					Log.i("TASK", "Session ID received: "
